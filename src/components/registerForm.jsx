@@ -1,47 +1,85 @@
-import React, { Component } from "react";
-import {Link} from "react-router-dom"
+import React, { useState } from "react";
+import {Form, Button} from "react-bootstrap"
+import {Link, useHistory} from "react-router-dom"
+import { getUserByEmail, addUser } from "../services/userService.js"
 
-class RegisterForm extends Component {
-    render() {
-        return (
-            <div>
-                <div class="h-100 d-flex justify-content-center align-items-center bg-dark">
-                    <div class="bg-white rounded p-4">
+export default function RegisterForm() {
+    const history = useHistory();
+    const [email, setEmail] = useState("");
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [confPassword, setConfPassword] = useState("");
+    const [emailError, setEmailError] = useState(false);
+    //const [pwError, setPWError] = useState(false);
+    const emailErrorMessage = "An account for this email already exists!";
+    //const pwErrorMessage = "Passwords must match!";
 
-                    <form class="d-flex flex-column align-items-center" id="create-account-form">
+    function validateForm() {
+        return email.length > 0 && username.length > 0 && 
+        password.length > 0 && confPassword.length > 0 &&
+        password === confPassword;
+    }
+    
+    function handleSubmit(event) {
+        event.preventDefault();
 
-                        <h2 id="sign-in-header">Create Account</h2>
+        const user = getUserByEmail(email);
 
-                        <div class="d-flex flex-column form-group m-2">
-                        <label for="email-field">Username</label>
-                        <input class="login-form-field form-control" type="email" name="email" id="email-field" placeholder="Enter Your Username"></input>
-                        </div>
+        if (user === undefined) {
+            setEmailError(false);
+            addUser(username, password, email);
+            history.push('/login')
+        } else {
+            setEmailError(true);
+        }
+    }
 
-                        <div class="d-flex flex-column form-group m-2">
-                        <label for="password-field">Password</label>
-                        <input class="login-form-field align-self-center form-control" type="password" name="password" id="password-field"  placeholder="Enter Your Password"></input>
-                        </div>
+    return (
+            <div class="h-100 d-flex justify-content-center align-items-center bg-dark">
+                <div class="bg-white rounded p-4">
+                    <h2 id="sign-in-header"><center>Create Account</center></h2>
 
-                        <div class="d-flex flex-column form-group m-2">
-                            <label for="password-field">Confirm Password</label>
-                            <input class="login-form-field align-self-center form-control" type="password" name="password" id="password-field"  placeholder="Confirm Your Password"></input>
-                            </div>
-
-                            <button type="button" class="btn btn-primary m-4" id="sign-in-form-submit">Sign Up</button>
-                            
-                            <div class="d-flex align-items-center flex-column form-group m-2">
-                                <center>
-                                    <Link className="link" to="/login">
-                                        Already have an account? Log In
-                                    </Link>
-                                </center>
-                            </div>
-                        </form>
+                    <Form onSubmit={handleSubmit}>
+                        <Form.Group className="m-2">
+                            <Form.Label>Email</Form.Label>
+                            <Form.Control autoFocus type="email" 
+                            value={email} onChange={(e) => setEmail(e.target.value)}>
+                            </Form.Control>
+                        </Form.Group>
+                        <center>{emailError ? emailErrorMessage : ""}</center>
+                        <Form.Group className="m-2">
+                            <Form.Label>Username</Form.Label>
+                            <Form.Control autoFocus type="username" 
+                            value={username} onChange={(e) => setUsername(e.target.value)}>
+                            </Form.Control>
+                        </Form.Group>
+                        <Form.Group className="m-2">
+                            <Form.Label>Password</Form.Label>
+                            <Form.Control autoFocus type="password" 
+                            value={password} onChange={(e) => setPassword(e.target.value)}>
+                            </Form.Control>
+                        </Form.Group>
+                        <Form.Group className="m-2">
+                            <Form.Label>Confirm Password</Form.Label>
+                            <Form.Control autoFocus type="password" 
+                            value={confPassword} onChange={(e) => setConfPassword(e.target.value)}>
+                            </Form.Control>
+                        </Form.Group>
+                        <center>
+                            <Button className="m-2" block size="lg" type="submit" disabled={!validateForm()}>
+                                Register
+                            </Button> 
+                        </center>
+                    </Form>
+                    <div className="m-2">
+                        <center className="m-2">
+                            <div>Already have an account?</div>
+                            <Link className="link" to="/login">
+                                Log In
+                            </Link>
+                        </center>
                     </div>
                 </div>
             </div>
-        );
-    }
+    );
 };
-
-export default RegisterForm;

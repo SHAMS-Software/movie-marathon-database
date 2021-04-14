@@ -1,15 +1,13 @@
 const users = [
     {
-        id: "1234",
-        username: "Jared6060",
-        password: "1234",
-        email: "jaredshapiro321@gmail.com"
-    },
-    {
-        id: "0001",
         username: "Admin",
         password: "Password",
         email: "admin@mmdb.com"
+    },
+    {
+        username: "Jared6060",
+        password: "1234",
+        email: "jaredshapiro321@gmail.com"
     }
 ]
 
@@ -23,4 +21,15 @@ export function getUserByUsername(username) {
 
 export function getUserByEmail(email) {
     return users.find((u) => u.email === email);
+}
+
+export function addUser(username, password, email) {
+    let userInDb = users.find((u) => u.email === email) || {};
+    userInDb.username = username;
+    userInDb.password = password;
+    userInDb.email = email;
+
+    users.push(userInDb);
+
+    return userInDb;
 }

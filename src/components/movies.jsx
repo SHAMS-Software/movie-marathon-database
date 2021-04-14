@@ -1,48 +1,29 @@
-import React from "react";
-//import {Navbar, Nav, NavDropdown, Form, FormControl, Button} from "react-bootstrap";
+import React, { Component } from "react";
+import { getMovies } from "../services/movieService.js"
+import MovieTable from "./movieTable"
 
-const Movies = () => {
-    return (    
-        <table class="bg-light table table-striped">
-            <thead>
-                <tr>
-                <th scope="col">#</th>
-                <th scope="col">Title</th>
-                <th scope="col">Release Date</th>
-                <th scope="col">Description</th>
-                <th scope="col">Runtime</th>
-                <th scope="col">Director</th>
-                <th scope="col">Studio</th>
-                <th scope="col">Rating</th>
-                <th scope="col">Where to Watch</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                <th scope="row">1</th>
-                <td>title</td>
-                <td>date</td>
-                <td>desc</td>
-                <td>1:00:00</td>
-                <td>dir</td>
-                <td>studio</td>
-                <td>5.0/5.0</td>
-                <td>Netflix</td>
-                </tr>
-                <tr>
-                <th scope="row">1</th>
-                <td>title</td>
-                <td>date</td>
-                <td>desc</td>
-                <td>1:00:00</td>
-                <td>dir</td>
-                <td>studio</td>
-                <td>5.0/5.0</td>
-                <td>Netflix</td>
-                </tr>
-            </tbody>
-        </table>
-    );
+class Movies extends Component {
+    state = {
+        movies: getMovies(),
+        sortColumn: {
+            path: "title",
+            order: "asc",
+        },
+    };
+    
+    
+    render() {
+        const { movies, sortColumn } = this.state;
+
+        return (    
+            <React.Fragment>
+                <MovieTable
+                movies={movies}
+                sortColumn={sortColumn}>
+                </MovieTable>
+            </React.Fragment>
+        );
+    }
 };
 
 export default Movies;
