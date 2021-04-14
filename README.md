@@ -11,3 +11,6 @@ front and back end development and application logic.
 # Scope of Functionalities
 Our functionalities include: allowing a user to view the database, log-in to or create an account
 for the database, search content from any page, and request modifications to be made to the content.
+
+# Building and Running the Project
+The project can be built by first downloading/installing Node.js (https://nodejs.org/en/download/). In the cloned directory, open a terminal and enter 'npm install'. This will download all required libraries. The project can then be run by entering 'npm start'. This will open a local host of the server on your pc.
