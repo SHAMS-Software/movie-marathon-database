@@ -30,7 +30,7 @@ class App extends Component {
         return (
             <React.Fragment>
                 <NavBar loggedIn={this.state.loggedIn} username={this.state.user.username}/>
-                <main className="container">
+                <main className="container-fluid">
                     <Switch>
                         <Route path="/home" component={Movies} />
                         <Route

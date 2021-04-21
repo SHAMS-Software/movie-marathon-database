@@ -1,6 +1,8 @@
+import _ from "lodash";
 import React, { Component } from "react";
 import { getMovies } from "../services/movieService.js"
 import MovieTable from "./movieTable"
+import MovieFilters from "./movieFilters"
 
 class Movies extends Component {
     state = {
@@ -10,7 +12,6 @@ class Movies extends Component {
             order: "asc",
         },
     };
-    
     
     render() {
         const { movies, sortColumn } = this.state;

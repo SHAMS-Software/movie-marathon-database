@@ -68,7 +68,7 @@ export default function RegisterForm() {
                         <center>
                             <Button className="m-2" block size="lg" type="submit" disabled={!validateForm()}>
                                 Register
-                            </Button> 
+                            </Button>
                         </center>
                     </Form>
                     <div className="m-2">
