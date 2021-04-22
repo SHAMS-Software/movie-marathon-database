@@ -1,8 +1,9 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
+import Search from "./search";
 //import {Navbar, Nav, NavDropdown, Form, FormControl, Button} from "react-bootstrap";
 
-const Navbar = ({loggedIn, username}) => {
+const Navbar = ({loggedIn, username, onSubmit}) => {
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <div className="container-fluid">
@@ -18,10 +19,8 @@ const Navbar = ({loggedIn, username}) => {
                             Home
                         </NavLink>
                     </ul>
-                    <form className="d-flex">
-                        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"></input>
-                        <button className="btn btn-outline-success" type="submit">Search</button>
-                    </form>
+                    <Search onSubmit={onSubmit}>
+                    </Search>
                     <button className="m-2 btn btn-outline-primary" type="submit">
                         <Link className="link" to="/login">
                             { loggedIn ? username : "Login"}

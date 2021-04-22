@@ -19,20 +19,31 @@ class App extends Component {
             username: "",
             password: "",
             email: ""
-        }
+        },
+        searchTerm: ""
     };
 
     doLogin = (currentUser) => {
         this.setState({ loggedIn: true, user: currentUser })
     }
 
+    handleSearch = (term) => {
+        this.setState({searchTerm: term});
+        console.log(term);
+    }
+
     render() {
         return (
             <React.Fragment>
-                <NavBar loggedIn={this.state.loggedIn} username={this.state.user.username}/>
+                <NavBar loggedIn={this.state.loggedIn} username={this.state.user.username} onSubmit={(term) => this.handleSearch(term)}/>
                 <main className="container-fluid">
                     <Switch>
-                        <Route path="/home" component={Movies} />
+                        <Route 
+                            path="/home" 
+                            render={(props) =>  (
+                                <Movies {...props} searchTerm={this.state.searchTerm}></Movies>
+                            )} 
+                        />
                         <Route
                             path='/login'
                             render={(props) => (
