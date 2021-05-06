@@ -49,7 +49,7 @@ class MovieTable extends Component {
 
     getSearchedData = (movies) => {
         const term = this.props.searchTerm;
-        console.log(term);
+        //console.log(term);
 
         const searchedMovies = movies.filter(o =>
             Object.keys(o).some(k => o[k].toString().toUpperCase().includes(term.toUpperCase())));
@@ -83,20 +83,77 @@ class MovieTable extends Component {
         return item;
     }
 
+    renderAdminHeader = () => {
+        const admin = this.props.admin;
+        if (admin) {
+            return(
+                <React.Fragment>
+                    <th>
+                        Modify Movie
+                    </th>
+                    <th>
+                        Remove Movie
+                    </th>
+                </React.Fragment>
+            )
+        }
+    }
+
+    onRemove = () => {
+        
+
+    }
+
+    renderAdminBody = (movie) => {
+        const admin = this.props.admin;
+        const { handleModify, handleRemove } = this.props;
+        //console.log(movie);
+        if (admin) {
+            return (
+                <React.Fragment>
+                    <td>
+                        <center>
+                            <button type="button" 
+                            class="btn btn-success" 
+                            onClick={() => handleModify(movie)}>
+                                ~
+                            </button>
+                        </center>
+                    </td>
+                    <td>
+                        <center>
+                            <button type="button" 
+                            class="btn btn-danger"
+                            onClick={() => handleRemove(movie)}>
+                                x
+                            </button>
+                        </center>
+                    </td>
+                </React.Fragment> 
+            )
+        } else {
+            return;
+        }
+    }
+
     render() {
         const movies = this.getModifiedData();
 
+        //console.log(movies[0])
         return (
             <Table className="bg-light table table-striped">
                 <thead>
-                    <tr>{this.columns.map((column) => (
-                        <th className="clickable"
-                        key={column.path}
-                        onClick={() => this.handleSort(column.path)}
-                        >
-                            {column.label} {this.renderSortIcon(column)}
-                        </th>
-                    ))}</tr>
+                    <tr>
+                        {this.columns.map((column) => (
+                            <th className="clickable"
+                            key={column.path}
+                            onClick={() => this.handleSort(column.path)}
+                            >
+                                {column.label} {this.renderSortIcon(column)}
+                            </th>
+                        ))}
+                        {this.renderAdminHeader()}
+                    </tr>
                 </thead>
                 <tbody>
                     {movies.map((movie) => (
@@ -106,6 +163,7 @@ class MovieTable extends Component {
                                     {this.renderItem(column.path, _.get(movie, column.path))}
                                 </td>
                             ))}
+                            {this.renderAdminBody(movie)}
                         </tr>
                     ))}
                 </tbody>

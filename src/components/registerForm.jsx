@@ -35,8 +35,8 @@ export default function RegisterForm() {
     }
 
     return (
-            <div class="h-100 d-flex justify-content-center align-items-center bg-dark">
-                <div class="bg-white rounded p-4">
+            <div className="h-100 d-flex justify-content-center align-items-center bg-dark">
+                <div className="bg-white rounded p-4">
                     <h2 id="sign-in-header"><center>Create Account</center></h2>
 
                     <Form onSubmit={handleSubmit}>

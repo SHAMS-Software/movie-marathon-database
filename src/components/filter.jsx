@@ -18,7 +18,7 @@ export default function Filter({name, path, filters, onChange}) {
             filter[path] = value;
         }
 
-        onChange(name, filter);
+        onChange(filter);
     }
     
     return (
@@ -26,6 +26,7 @@ export default function Filter({name, path, filters, onChange}) {
         placeholder={name}
         aria-label={name}
         aria-describedby="basic-addon1"
+        defaultValue={name === "value" ? filters[path] : filters[path][name]}
         onChange={(e) => handleChange(e)}
         />
     );

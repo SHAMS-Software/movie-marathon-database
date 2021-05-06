@@ -3,7 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import Search from "./search";
 //import {Navbar, Nav, NavDropdown, Form, FormControl, Button} from "react-bootstrap";
 
-const Navbar = ({loggedIn, username, onSubmit}) => {
+const Navbar = ({loggedIn, username, admin, onSubmit}) => {
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <div className="container-fluid">
@@ -17,6 +17,11 @@ const Navbar = ({loggedIn, username, onSubmit}) => {
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                         <NavLink className="nav-link" to="/home">
                             Home
+                        </NavLink>
+                    </ul>
+                    <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                        <NavLink className="nav-link" to="/add-movie">
+                            { admin ? "Add Movie" : "Request Movie"}
                         </NavLink>
                     </ul>
                     <Search onSubmit={onSubmit}>

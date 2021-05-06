@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
+
 export default function Search({onSubmit}) {
     const [term, setTerm] = useState("");
+    const history = useHistory();
 
     function handleSubmit(event) {
         event.preventDefault();
+        history.push("/home");
+        
         onSubmit(term);
     }
 
