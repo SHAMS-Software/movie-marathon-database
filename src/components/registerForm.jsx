@@ -10,9 +10,7 @@ export default function RegisterForm() {
     const [password, setPassword] = useState("");
     const [confPassword, setConfPassword] = useState("");
     const [emailError, setEmailError] = useState(false);
-    //const [pwError, setPWError] = useState(false);
     const emailErrorMessage = "An account for this email already exists!";
-    //const pwErrorMessage = "Passwords must match!";
 
     function validateForm() {
         return email.length > 0 && username.length > 0 && 

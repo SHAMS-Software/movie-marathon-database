@@ -1,18 +1,14 @@
 import React, { Component } from "react";
 import { Route, Redirect, Switch } from "react-router-dom";
-import Movies from "./components/movies";
 import _ from "lodash";
-//import Customers from "./components/customers";
-//import Rentals from "./components/rentals";
-//import NotFound from "./components/notFound";
+import Movies from "./components/movies";
 import NavBar from "./components/navbar";
-//import MovieForm from "./components/movieForm";
 import LoginForm from "./components/loginForm";
 import RegisterForm from "./components/registerForm";
 import ForgotPasswordForm from "./components/forgotPasswordForm";
 import AddMovieForm from "./components/addMovieForm"
-import "./App.css";
 import { getMovies } from "./services/movieService.js"
+import "./App.css";
 
 class App extends Component {
     state = {
@@ -23,7 +19,8 @@ class App extends Component {
             username: "",
             password: "",
             email: "",
-            admin: 0
+            admin: 0,
+            moderator: 0
         },
         searchTerm: "",
         filters: {
@@ -133,16 +130,11 @@ class App extends Component {
         const user = this.state.user;
         var movies = this.state.movies;
 
-        //console.log(movies);
         if (user.admin) {
             movies = _.filter(movies, function(m) {
                 return (m.id !== movie.id)
             })
             
-            //const isSameID = (element) => element.id === movie.id;
-            //const index = movies.findIndex(isSameID);
-            //movies.splice(index, 1);
-            //console.log(movies);
             this.setState({movies: movies});
         }
     }
@@ -164,17 +156,14 @@ class App extends Component {
 
     handleSearch = (term) => {
         this.setState({searchTerm: term});
-        //console.log(term);
     }
 
     handleFilter = (movieFilters) => {
         const filters = movieFilters;
         this.setState({filters});
-        //console.log("Fuck")
     }
 
     render() {
-        //console.log(this.state.user.admin)
         const movies = this.getFilteredData();
         return (
             <React.Fragment>

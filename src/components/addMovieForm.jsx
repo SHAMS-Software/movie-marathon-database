@@ -1,8 +1,6 @@
-// Based on current user's admin status, display submit button or request button.
 import React, { useState } from "react";
 import {Form, Button, Row, Col} from "react-bootstrap"
-import {Link, useHistory} from "react-router-dom"
-//import { addMovie, getMovieByTitle } from "../services/movieService.js"
+import {useHistory} from "react-router-dom"
 
 export default function AddMovieForm({ admin, loggedIn, onSubmit }) {
     const history = useHistory();

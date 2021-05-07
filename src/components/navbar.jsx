@@ -1,7 +1,6 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import Search from "./search";
-//import {Navbar, Nav, NavDropdown, Form, FormControl, Button} from "react-bootstrap";
 
 const Navbar = ({loggedIn, username, admin, onSubmit}) => {
     return (

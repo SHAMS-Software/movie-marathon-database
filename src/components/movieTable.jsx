@@ -49,7 +49,6 @@ class MovieTable extends Component {
 
     getSearchedData = (movies) => {
         const term = this.props.searchTerm;
-        //console.log(term);
 
         const searchedMovies = movies.filter(o =>
             Object.keys(o).some(k => o[k].toString().toUpperCase().includes(term.toUpperCase())));
@@ -107,7 +106,6 @@ class MovieTable extends Component {
     renderAdminBody = (movie) => {
         const admin = this.props.admin;
         const { handleModify, handleRemove } = this.props;
-        //console.log(movie);
         if (admin) {
             return (
                 <React.Fragment>
@@ -139,7 +137,6 @@ class MovieTable extends Component {
     render() {
         const movies = this.getModifiedData();
 
-        //console.log(movies[0])
         return (
             <Table className="bg-light table table-striped">
                 <thead>

@@ -20,7 +20,7 @@ export default function Filter({name, path, filters, onChange}) {
 
         onChange(filter);
     }
-    
+
     return (
         <FormControl
         placeholder={name}
